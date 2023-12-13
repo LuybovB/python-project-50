@@ -2,10 +2,11 @@ import argparse
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Your description of the script')
+    parser = argparse.ArgumentParser(description='Compares two configuration files and shows a difference.')
 
     # add other arguments
-    parser.add_argument('path', help='Description of the path argument')
+    parser.add_argument('first_file')
+    parser.add_argument('second_file')
 
     args = parser.parse_args()
 
