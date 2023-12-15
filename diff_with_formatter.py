@@ -10,11 +10,16 @@ def generate_diff(file_path1, file_path2):
     keys_union = set(data1.keys()) | set(data2.keys())
 
     for key in sorted(keys_union):
-        if data1.get(key) == data2.get(key):
+        if key in data1 and key in data2 and data1[key] == data2[key]:
             diff[key] = data1[key]
         else:
-            diff[f'- {key}'] = data1.get(key, 'null')
-            diff[f'+ {key}'] = data2.get(key, 'null')
+            if key in data1 and key not in data2:
+                diff[f'- {key}'] = data1[key]
+            elif key in data2 and key not in data1:
+                diff[f'+ {key}'] = data2[key]
+            else:
+                diff[f'- {key}'] = data1[key]
+                diff[f'+ {key}'] = data2[key]
 
     return json.dumps(diff, indent=2)
 
