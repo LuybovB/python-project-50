@@ -24,8 +24,7 @@ def generate_diff(file_path1, file_path2):
     return json.dumps(diff, indent=2)
 
 
-
-file_path1 = "/home/ubunt/PycharmProjects/pythonProject/python-project-50/filepath1.json"
-file_path2 = "/home/ubunt/PycharmProjects/pythonProject/python-project-50/filepath2.json"
+file_path1 = "/home/lubov/PycharmProjects/pythonProject/python-project-50/filepath1.json"
+file_path2 = "/home/lubov/PycharmProjects/pythonProject/python-project-50/filepath2.json"
 result = generate_diff(file_path1, file_path2)
 print(result)
