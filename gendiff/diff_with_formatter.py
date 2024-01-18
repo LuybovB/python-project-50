@@ -6,25 +6,23 @@ def generate_diff(file_path1, file_path2):
         data1 = json.load(file1)
         data2 = json.load(file2)
 
-    diff = {}
+    diff = []
     keys_union = set(data1.keys()) | set(data2.keys())
 
     for key in sorted(keys_union):
         if key in data1 and key in data2 and data1[key] == data2[key]:
-            diff[key] = data1[key]
+            diff.append(f'   {key}: {data1[key]}')
         else:
             if key in data1 and key not in data2:
-                diff[f'- {key}'] = data1[key]
+                diff.append(f'- {key}: {data1[key]}')
             elif key in data2 and key not in data1:
-                diff[f'+ {key}'] = data2[key]
+                diff.append(f'+ {key}: {data2[key]}')
             else:
-                diff[f'- {key}'] = data1[key]
-                diff[f'+ {key}'] = data2[key]
+                diff.append(f'- {key}: {data1[key]}')
+                diff.append(f'+ {key}: {data2[key]}')
 
-    return json.dumps(diff, indent=2)
+    result = '{\n' + '\n'.join(diff) + '\n}'
+    result = result.replace('\n+', '\n+ ').replace('\n-', '\n- ')
 
+    return result
 
-file_path1 = "/home/lubov/PycharmProjects/pythonProject/python-project-50/filepath1.json"
-file_path2 = "/home/lubov/PycharmProjects/pythonProject/python-project-50/filepath2.json"
-result = generate_diff(file_path1, file_path2)
-print(result)
