@@ -2,21 +2,28 @@ name: CI check
 on: push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: ${{ matrix.python-version }}
+
       - name: install dependencies
         run: |
           pip install poetry flake8 pytest
           make install
+
       - name: Run linter
         run: make lint
+
       - name: Run tests
         run: make test
+
       - name: Code Coverage
         uses: paambaati/codeclimate-action@v3.0.0
         with:
