@@ -1,10 +1,14 @@
 import json
 
 
+def load_json_from_file(file_path):
+    with open(file_path, 'r') as file:
+        return json.load(file)
+
+
 def generate_diff(file_path1, file_path2):
-    with open(file_path1, 'r') as file1, open(file_path2, 'r') as file2:
-        data1 = json.load(file1)
-        data2 = json.load(file2)
+    data1 = load_json_from_file(file_path1)
+    data2 = load_json_from_file(file_path2)
 
     diff = []
     keys_union = set(data1.keys()) | set(data2.keys())
@@ -25,4 +29,3 @@ def generate_diff(file_path1, file_path2):
     result = result.replace('\n+', '\n+ ').replace('\n-', '\n- ')
 
     return result
-
