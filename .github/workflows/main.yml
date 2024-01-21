@@ -1,0 +1,26 @@
+name: CI check
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+      - name: install dependencies
+        run: |
+          pip install poetry flake8 pytest
+          make install
+      - name: Run linter
+        run: make lint
+      - name: Run tests
+        run: make test
+      - name: Code Coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        with:
+          coverageCommand: make test-coverage
+          debug: true
