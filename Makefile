@@ -14,4 +14,8 @@ check:
 	poetry run pytest -v
 
 install:
+	pip install poetry
 	poetry install
+
+tests-coverage:
+	poetry run pytest --cov=gendiff --cov-report xml
