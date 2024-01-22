@@ -1,7 +1,8 @@
-name: CI check
+name: CI
+
 on:
-  - push
-  - pull_request
+  push:
+  pull_request:
 
 jobs:
   build:
@@ -9,26 +10,36 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
+
     steps:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+
+      - name: Install dependencies with Poetry
         run: |
-          pip install poetry
-          make install
+          curl -sSL https://install.python-poetry.org | python3 -  # Install Poetry
+          poetry install  # Install project dependencies
+
       - name: Run linter
         run: |
-          make lint
+          poetry run flake8  # Replace 'flake8' with the linter command for your project
+
       - name: Run Pytest
         run: |
-          make check
+          poetry run pytest  # Replace 'pytest' with the Pytest command for your project
+
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.2.0
-        if: github.ref_name == 'main'
+        if: github.ref == 'refs/heads/main'  # Adjust the branch condition as needed
+        run: |
+          poetry run pytest --cov=.
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+
+      - name: Publish code coverage to Code Climate
+        if: github.ref == 'refs/heads/main'  # Adjust the branch condition as needed
+        uses: paambaati/codeclimate-action@v3.2.0
         with:
-          CoverageCommand: make tests-coverage
-          debug: true
+          coverageCommand: "poetry run pytest --cov=."
+          debug: true  # Enable debug mode as needed
