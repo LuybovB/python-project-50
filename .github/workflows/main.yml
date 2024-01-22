@@ -24,22 +24,22 @@ jobs:
 
       - name: Run linter
         run: |
-          poetry run flake8  # Replace 'flake8' with the linter command for your project
+          poetry run flake8
 
       - name: Run Pytest
         run: |
-          poetry run pytest  # Replace 'pytest' with the Pytest command for your project
+          poetry run pytest
 
       - name: Test & publish code coverage
-        if: github.ref == 'refs/heads/main'  # Adjust the branch condition as needed
+        if: github.ref == 'refs/heads/main'
         run: |
           poetry run pytest --cov=.
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
       - name: Publish code coverage to Code Climate
-        if: github.ref == 'refs/heads/main'  # Adjust the branch condition as needed
+        if: github.ref == 'refs/heads/main'
         uses: paambaati/codeclimate-action@v3.2.0
         with:
           coverageCommand: "poetry run pytest --cov=."
-          debug: true  # Enable debug mode as needed
+          debug: true
