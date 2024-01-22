@@ -1,4 +1,3 @@
-import pytest
 from gendiff.diff_with_formatter import generate_diff
 
 test_data = [
