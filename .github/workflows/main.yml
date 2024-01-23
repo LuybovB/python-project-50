@@ -23,7 +23,7 @@ jobs:
 
       - name: Run linter
         run: |
-          poetry run flake8
+          make lint
 
       - name: Run Pytest
         run: |
