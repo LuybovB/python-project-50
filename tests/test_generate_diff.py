@@ -8,3 +8,4 @@ test_data = [
 def test_generate_diff():
     for filepath1, filepath2, expected_file in test_data:
         diff = generate_diff(filepath1, filepath2)
+        assert diff == expected_file

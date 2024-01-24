@@ -1,5 +1,5 @@
 lint:
-	poetry run flake8 gendiff
+	poetry run flake8
 
 gen-diff:
 	poetry run gendiff
