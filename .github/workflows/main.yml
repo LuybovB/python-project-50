@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: pip install poetry
       - name: Run linter
-        run: make lint
+        run: poetry run flake8
       - name: Run tests
         run: make test
       - name: Code Coverage
