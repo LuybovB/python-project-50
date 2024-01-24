@@ -3,17 +3,19 @@ name = "hexlet-code"
 version = "0.1.0"
 description = ""
 authors = ["LuybovB <grandprinceess7777@gmail.com>"]
-readme = "README.md"
-packages = [{include = "gendiff"}]
+packages = [
+  { include = "gendiff" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
