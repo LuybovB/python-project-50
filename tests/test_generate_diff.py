@@ -1,7 +1,12 @@
 from gendiff.diff_with_formatter import generate_diff
+import os
+
+
+file1_path = os.path.join(os.path.dirname(__file__), "fixtures", "file1.json")
+file2_path = os.path.join(os.path.dirname(__file__), "fixtures", "file2.json")
 
 test_data = [
-    ("fixtures/file1.json", "fixtures/file2.json", "fixtures/file3.json")
+    (file1_path, file2_path, "fixtures/file3.json")
 ]
 
 
