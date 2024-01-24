@@ -1,4 +1,4 @@
-name: CI
+name: difference_calc
 
 on:
   push:
@@ -16,8 +16,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - run: pip install poetry
-      - run: make install
+      - run: poetry install
       - run: make pytest
       - run: make lint
       - name: Test & publish code coverage
