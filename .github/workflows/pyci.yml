@@ -30,7 +30,9 @@ jobs:
         run: poetry install
 
       - name: Install dependencies
-        run: poetry install
+        run: |
+          poetry install
+          pip install pyyaml
 
       - name: Lint code
         run: make lint
