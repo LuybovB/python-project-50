@@ -1,4 +1,4 @@
-from gendiff.diff_with_formatter import generate_diff, load_data_from_file
+from gendiff.diff_with_formatter import generate_diff
 import os
 
 file1_path = os.path.join(os.path.dirname(__file__), "fixtures", "file1.json")
