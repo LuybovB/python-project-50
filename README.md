@@ -13,16 +13,15 @@
 - Поддержка разных входных форматов: yaml, json
 - Генерация отчета в виде plain text, stylish и json
 
-## Запуск
+## Как запустить проект:
 
-Как запустить проект:
-
-## Справка
+### Справка
 [![asciicast](https://asciinema.org/a/8m0T0W616R3nSZ4VeOhB9lZ9D.svg)](https://asciinema.org/a/8m0T0W616R3nSZ4VeOhB9lZ9D)
-## Данные по умолчанию
+### Сравнение плоских файлов (JSON)
 
-Пояснение по умолчанию, если таковые есть.
+[![asciicast](https://asciinema.org/a/Q9fnv3xsmRbE4ALj0gLTgjYX0.svg)](https://asciinema.org/a/Q9fnv3xsmRbE4ALj0gLTgjYX0)
 
-## Примеры использования
+### Сравнение плоских файлов (YAML)
+[![asciicast](https://asciinema.org/a/MTqHdPucYzPy1btfssQ8ohsMF.svg)](https://asciinema.org/a/MTqHdPucYzPy1btfssQ8ohsMF)
 
 ## Сравнение двух плоских файлов: JSON

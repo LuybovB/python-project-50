@@ -1,2 +1,3 @@
-def diff_with_formatter():
-    return None
+from gendiff.gendiff import generate_diff
+
+__all__ = ['generate_diff']
