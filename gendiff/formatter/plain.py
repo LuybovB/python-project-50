@@ -31,29 +31,23 @@ def get_message_string(diff, previous_path):
         current_path = get_path_string(previous_path, key)
         type_ = value_types.get('type')
         value = value_types.get('value')
-
         if type_ == NESTED:
             nested_messages = get_message_string(value, current_path)
             messages.extend(nested_messages)
-
         elif type_ == CHANGED:
-            old_value = stringify_value(value.get('oldvalue'))
-            new_value = stringify_value(value.get('newvalue'))
-            message = DIFF_MESSAGES[type_].format(path=current_path,
-                                                  old_value=old_value,
-                                                  new_value=new_value)
+            old_value = stringify_value(value.get('old_value'))
+            new_value = stringify_value(value.get('new_value'))
+            message = DIFF_MESSAGES[type_].format(
+                path=current_path, old_value=old_value, new_value=new_value
+                )
             messages.append(message)
-
         elif type_ == ADDED:
             added_value = stringify_value(value)
-            message = DIFF_MESSAGES[type_].format(path=current_path,
-                                                  value=added_value)
+            message = DIFF_MESSAGES[type_].format(path=current_path, value=added_value)
             messages.append(message)
-
         elif type_ == REMOVED:
             message = DIFF_MESSAGES[type_].format(path=current_path)
             messages.append(message)
-
     return messages
 
 
