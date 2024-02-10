@@ -27,6 +27,8 @@ test_data = [("tests/fixtures/file1.json", "tests/fixtures/file2.json",
              ('tests/fixtures/file1_nested.yaml',
               'tests/fixtures/file2_nested.yaml',
               'tests/fixtures/answer_json_nested', "json"),
+             ("tests/fixtures/file1.yml", "tests/fixtures/file2.yml",
+              "tests/fixtures/answer_stylish_flat", "stylish"),
              ]
 
 
