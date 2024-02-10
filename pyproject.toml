@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "hexlet-project"
+name = "hexlet-code"
 version = "0.1.0"
 description = ""
 authors = ["LuybovB <grandprinceess7777@gmail.com>"]
@@ -17,9 +17,10 @@ flake8 = "^4.0.1"
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^4.1.0"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
