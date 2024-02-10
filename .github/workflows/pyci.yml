@@ -1,5 +1,4 @@
-name: difference_calc
-
+name: Python CL
 on:
   push:
     branches:
