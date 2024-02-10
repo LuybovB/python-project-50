@@ -1,4 +1,11 @@
+*.egg-info
+__pycache__
+dist/
+*.pyc
+../.venv/
 coverage.xml
-demo.cast
-package-lock.json
-poetry.lock
+.pytest_cache/
+.package.json
+.package-lock.json
+..idea
+.demo.cast
