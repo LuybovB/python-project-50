@@ -3,7 +3,8 @@ from gendiff.gendiff import generate_diff
 import re
 
 test_data = [("tests/fixtures/file1.json", "tests/fixtures/file2.json",
-             "tests/fixtures/answer_stylish_flat", "stylish"),
+             "tests/fixtures/answer_stylish_flat",
+              "stylish"),
              ("tests/fixtures/file1.yaml", "tests/fixtures/file2.yaml",
              "tests/fixtures/answer_stylish_flat", "stylish"),
              ("tests/fixtures/file1_nested.json",
