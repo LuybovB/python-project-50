@@ -1,7 +1,7 @@
 import json
 from gendiff.data import NESTED, ADDED, REMOVED, CHANGED, UNCHANGED
 
-
+INDENT = '    '
 FLAGS = {
     ADDED: '  + ',
     REMOVED: '  - ',
@@ -30,38 +30,31 @@ def stringify_value(value, depth):
     return result
 
 
-def stringify_diff(diff, depth, indent="  "):
+
+def stringify_diff(diff, depth):
     diff_list = []
-    spaces = indent * depth
-    prefix = indent * (depth + 1)
+    spaces = INDENT * depth
     for key, flags in diff.items():
         type_ = flags.get('type')
         value = flags.get('value')
-
         if type_ == NESTED:
-            result_key = f"{spaces}  {key}:"
-            result_value = (
-                f"{prefix}{{\n{stringify_diff(value, depth + 1,indent)}"
-                f"\n{spaces}{indent}}}"
-            )
-            diff_list.append(f"{result_key}\n{result_value}")
+            result_key = f'{spaces}{INDENT}{key}: ' \
+                         f'{{\n{stringify_diff(value, depth + 1)}'
+            result_value = f'{spaces}{INDENT}}}'
+            diff_list.extend([result_key, result_value])
         elif type_ == CHANGED:
             old_value = value.get('old value')
             new_value = value.get('new value')
-            result_key = (f"{spaces}- {key}:"
-                          f" {stringify_value(old_value, depth + 1)}")
-            diff_list.append(result_key)
-            result_key = (f"{spaces}+ {key}:"
-                          f" {stringify_value(new_value, depth + 1)}")
-            diff_list.append(result_key)
+            result_key = f'{spaces}{FLAGS[REMOVED]}{key}: ' \
+                         f'{stringify_value(old_value, depth + 1)}'
+            result_value = f'{spaces}{FLAGS[ADDED]}{key}: ' \
+                           f'{stringify_value(new_value, depth + 1)}'
+            diff_list.extend([result_key, result_value])
         else:
-            result_string = (f"{spaces}{FLAGS.get(type_, '')}"
-                             f" {key}: {stringify_value(value, depth + 1)}")
+            result_string = f'{spaces}{FLAGS[type_]}{key}: ' \
+                            f'{stringify_value(value, depth + 1)}'
             diff_list.append(result_string)
-
-    result = "\n".join(diff_list)
-    return result
-
+    return '\n'.join(diff_list)
 
 def format_stylish(diff, depth=0):
     final_list = ['{', stringify_diff(diff, depth), '}']
