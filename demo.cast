@@ -1,0 +1,8 @@
+{"version": 2, "width": 219, "height": 17, "timestamp": 1707334711, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.02771, "o", "\u001b[?2004h\u001b]0;lubov@lubov-VirtualBox: ~/PycharmProjects/pythonProject/python-project-50\u0007\u001b[01;32mlubov@lubov-VirtualBox\u001b[00m:\u001b[01;34m~/PycharmProjects/pythonProject/python-project-50\u001b[00m$ "]
+[2.065909, "o", "\u001b[7mgendiff file1_nested.json file2_nested.json\u001b[27m"]
+[3.217787, "o", "\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\bgendiff file1_nested.json file2_nested.json\r\n\u001b[?2004l\r"]
+[3.247807, "o", "Traceback (most recent call last):\r\n  File \"/home/lubov/PycharmProjects/pythonProject/.venv/bin/gendiff\", line 6, in <module>\r\n    sys.exit(main())\r\n  File \"/home/lubov/PycharmProjects/pythonProject/python-project-50/gendiff/scripts/gendiff.py\", line 28, in main\r\n"]
+[3.247946, "o", "    print(generate_diff(args.first_file, args.second_file, args.format))\r\n  File \"/home/lubov/PycharmProjects/pythonProject/python-project-50/gendiff/gendiff.py\", line 11, in generate_diff\r\n    data1 = parse(read_file(filepath1), format1)\r\n  File \"/home/lubov/PycharmProjects/pythonProject/python-project-50/gendiff/reader.py\", line 7, in read_file\r\n    with open(absolute_path, 'r') as file:\r\nFileNotFoundError: [Errno 2] No such file or directory: '/home/lubov/PycharmProjects/pythonProject/python-project-50/file1_nested.json'\r\n"]
+[3.250568, "o", "\u001b[?2004h\u001b]0;lubov@lubov-VirtualBox: ~/PycharmProjects/pythonProject/python-project-50\u0007\u001b[01;32mlubov@lubov-VirtualBox\u001b[00m:\u001b[01;34m~/PycharmProjects/pythonProject/python-project-50\u001b[00m$ "]
+[8.60913, "o", "\u001b[?2004l\r\r\nexit\r\n"]
