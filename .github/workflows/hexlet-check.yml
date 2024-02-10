@@ -16,6 +16,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install dependencies
+        run: |
+          poetry install
+          pip install pyyaml
       - uses: actions/checkout@v4
 
       - name: Hexlet project check
