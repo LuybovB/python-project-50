@@ -1,15 +1,15 @@
-#!/usr/bin/env python
 import os
 
 
-def read_file(file_path):
-    with open(file_path, 'r') as file:
+def read_file(filepath):
+    absolute_path = os.path.abspath(filepath)
+    with open(absolute_path, 'r') as file:
         return file.read()
 
 
-def get_format_file(file_path):
-    root, extension = os.path.splitext(file_path)
-    if extension in ('.yaml', '.yml'):
+def get_format(filepath):
+    root, ext = os.path.splitext(filepath)
+    if ext == '.yaml' or ext == '.yml':
         return 'yaml'
-    elif extension == '.json':
+    elif ext == '.json':
         return 'json'

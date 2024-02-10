@@ -1,4 +1,3 @@
-
 import json
 from gendiff.data import NESTED, ADDED, REMOVED, CHANGED
 
@@ -11,45 +10,46 @@ DIFF_MESSAGES = {
 
 
 def stringify_value(value):
-    if value is None or isinstance(value, (bool, int, float)):
+    if isinstance(value, bool) or value is None:
         return json.dumps(value)
     elif isinstance(value, str):
         return f"'{value}'"
-    elif isinstance(value, dict):
+    elif isinstance(value, dict) or isinstance(value, list):
         return '[complex value]'
     else:
-        return value
+        return str(value)
 
 
-def get_path_string(previous_path, key):
-    return f"{previous_path}.{key}" if previous_path else key
+def get_path(previous_path: str, key: str) -> str:
+    if previous_path:
+        return f"{previous_path}.{key}"
+    return key
 
 
 def get_message_string(diff, previous_path):
     messages = []
-    for key, value_types in diff.items():
-        current_path = get_path_string(previous_path, key)
-        type_ = value_types.get('type')
-        value = value_types.get('value')
+    for key, types in diff.items():
+        path = get_path(previous_path, key)
+        type_ = types.get('type')
+        value = types.get('value')
         if type_ == NESTED:
-            nested_messages = get_message_string(value, current_path)
-            messages.extend(nested_messages)
+            messages.append(get_message_string(value, path))
         elif type_ == CHANGED:
-            old_value = stringify_value(value.get('old_value'))
-            new_value = stringify_value(value.get('new_value'))
-            message = DIFF_MESSAGES[type_].format(
-                path=current_path, old_value=old_value, new_value=new_value
-                )
+            old_value = stringify_value(value.get('old value'))
+            new_value = stringify_value(value.get('new value'))
+            message = DIFF_MESSAGES[CHANGED].format(path=path,
+                                                    old_value=old_value,
+                                                    new_value=new_value)
             messages.append(message)
         elif type_ == ADDED:
-            added_value = stringify_value(value)
-            message = DIFF_MESSAGES[type_].format(path=current_path, value=added_value)
+            value = stringify_value(value)
+            message = DIFF_MESSAGES[ADDED].format(path=path, value=value)
             messages.append(message)
         elif type_ == REMOVED:
-            message = DIFF_MESSAGES[type_].format(path=current_path)
+            message = DIFF_MESSAGES[REMOVED].format(path=path)
             messages.append(message)
-    return messages
+    return '\n'.join(messages)
 
 
 def format_plain(diff):
-    return "\n".join(get_message_string(diff, previous_path=''))
+    return get_message_string(diff, previous_path='')

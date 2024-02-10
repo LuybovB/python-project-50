@@ -1,39 +1,41 @@
 import pytest
 from gendiff.gendiff import generate_diff
-from gendiff.formatter.formats import JSON, STYLISH, PLAIN
+import re
+
+test_data = [("tests/fixtures/file1.json", "tests/fixtures/file2.json",
+             "tests/fixtures/answer_stylish_flat", "stylish"),
+             ("tests/fixtures/file1.yaml", "tests/fixtures/file2.yaml",
+             "tests/fixtures/answer_stylish_flat", "stylish"),
+             ("tests/fixtures/file1_nested.json",
+              "tests/fixtures/file2_nested.json",
+             "tests/fixtures/answer_stylish_nested", "stylish"),
+             ("tests/fixtures/file1_nested.yaml",
+              "tests/fixtures/file2_nested.yaml",
+             "tests/fixtures/answer_stylish_nested", "stylish"),
+             ("tests/fixtures/file1.json", "tests/fixtures/file2.json",
+              "tests/fixtures/answer_plain_flat", "plain"),
+             ('tests/fixtures/file1.yaml', 'tests/fixtures/file2.yaml',
+              'tests/fixtures/answer_plain_flat', "plain"),
+             ('tests/fixtures/file1_nested.json',
+              'tests/fixtures/file2_nested.json',
+              'tests/fixtures/answer_plain_nested', "plain"),
+             ('tests/fixtures/file1.json', 'tests/fixtures/file2.json',
+              'tests/fixtures/answer_json_flat', "json"),
+             ('tests/fixtures/file1_nested.json',
+              'tests/fixtures/file2_nested.json',
+              'tests/fixtures/answer_json_nested', "json"),
+             ('tests/fixtures/file1_nested.yaml',
+              'tests/fixtures/file2_nested.yaml',
+              'tests/fixtures/answer_json_nested', "json"),
+             ]
 
 
-@pytest.mark.parametrize('filepath1, filepath2, format_name, answer', [
-    ('tests/fixtures/file1.json', 'tests/fixtures/file2.json',
-     STYLISH, 'tests/fixtures/answer_stylish_flat'),
-    ('tests/fixtures/file1.yaml', 'tests/fixtures/file2.yaml',
-     STYLISH, 'tests/fixtures/answer_stylish_flat'),
-    ('tests/fixtures/file1.yml', 'tests/fixtures/file2.yml',
-     STYLISH, 'tests/fixtures/answer_stylish_flat'),
-    ('tests/fixtures/file1_nested.json', 'tests/fixtures/file2_nested.json',
-     STYLISH, 'tests/fixtures/answer_stylish_nested'),
-    ('tests/fixtures/file1.yaml', 'tests/fixtures/file2_nested.yaml',
-     STYLISH, 'tests/fixtures/answer_stylish_nested'),
-    ('tests/fixtures/file1.json', 'tests/fixtures/file2.json',
-     PLAIN, 'tests/fixtures/answer_plain_flat'),
-    ('tests/fixtures/file1.yaml', 'tests/fixtures/file2.yaml',
-     PLAIN, 'tests/fixtures/answer_plain_flat'),
-    ('tests/fixtures/file1.yml', 'tests/fixtures/file2.yml',
-     PLAIN, 'tests/fixtures/answer_plain_flat'),
-    ('tests/fixtures/file1_nested.json', 'tests/fixtures/file2_nested.json',
-     PLAIN, 'tests/fixtures/answer_plain_nested'),
-    ('tests/fixtures/file1.yaml', 'tests/fixtures/file2_nested.yaml',
-     PLAIN, 'tests/fixtures/answer_plain_nested'),
-    ('tests/fixtures/file1.json', 'tests/fixtures/file2.json',
-     JSON, 'tests/fixtures/answer_plain_flat'),
-    ('tests/fixtures/file1.yaml', 'tests/fixtures/file2.yaml',
-     JSON, 'tests/fixtures/answer_plain_flat'),
-    ('tests/fixtures/file1.yml', 'tests/fixtures/file2.yml',
-     JSON, 'tests/fixtures/answer_plain_flat'),
-    ('tests/fixtures/file1_nested.json', 'tests/fixtures/file2_nested.json',
-     JSON, 'tests/fixtures/answer_json_nested'),
-    ('tests/fixtures/file1.yaml', 'tests/fixtures/file2_nested.yaml',
-     JSON, 'tests/fixtures/answer_json_nested'),
-])
-def test_generate_diff(filepath1, filepath2, format_name, answer):
-    assert generate_diff(filepath1, filepath2, format_name)
+@pytest.mark.parametrize("filepath1, filepath2, expected, format", test_data)
+def test_generate_diff(filepath1, filepath2, expected, format):
+    diff = generate_diff(filepath1, filepath2, format)
+    with open(expected, 'r') as f:
+        ans = f.read()
+    diff = re.sub(r'\s+', ' ', diff.strip())
+    ans = re.sub(r'\s+', ' ', ans.strip())
+
+    assert diff == ans

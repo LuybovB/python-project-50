@@ -24,4 +24,14 @@
 ### Сравнение плоских файлов (YAML)
 [![asciicast](https://asciinema.org/a/MTqHdPucYzPy1btfssQ8ohsMF.svg)](https://asciinema.org/a/MTqHdPucYzPy1btfssQ8ohsMF)
 
-## Сравнение двух плоских файлов: JSON
+### Рекурсивное сравнение двух файлов (JSON)
+[![asciicast](https://asciinema.org/a/YehjM7XouZPOlo5Sogqm5ff3S.svg)](https://asciinema.org/a/YehjM7XouZPOlo5Sogqm5ff3S)
+
+### Рекурсивное сравнение двух файлов (YAML)
+[![asciicast](https://asciinema.org/a/IFWm6r7LwMNUiPjCVSZ55OKBk.svg)](https://asciinema.org/a/IFWm6r7LwMNUiPjCVSZ55OKBk)
+
+### Плоский формат
+[![asciicast](https://asciinema.org/a/X1On5T9QrwkGXbUtjZUNhwwca.svg)](https://asciinema.org/a/X1On5T9QrwkGXbUtjZUNhwwca)
+
+### Вывод в JSON
+[![asciicast](https://asciinema.org/a/gU6C2bgtFuxAHHz7VqyHNPMVO.svg)](https://asciinema.org/a/gU6C2bgtFuxAHHz7VqyHNPMVO)
