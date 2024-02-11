@@ -18,17 +18,18 @@ def get_stringify_value(value):
 def stringify_value(value, depth):
     if not isinstance(value, dict):
         return get_stringify_value(value)
-    lines = []
-    spaces = "  " * depth
-    for key, inner_value in value.items():
-        if isinstance(inner_value, dict):
-            line = f"{spaces}  {key}: {stringify_value(inner_value, depth + 1)}"
+    string_list = ['{']
+    spaces = INDENT * depth
+    for key, value_ in value.items():
+        if isinstance(value_, dict):
+            string = f'{spaces}{INDENT}{key}: ' \
+                     f'{stringify_value(value_, depth + 1)}'
+            string_list.append(string)
         else:
-            line = f"{spaces}  {key}: {stringify_value(inner_value, depth)}"
-        lines.append(line)
-    result = "{" + "\n".join(lines) + "\n" + spaces + "}"
-    return result
-
+            string = f'{spaces}{INDENT}{key}: {stringify_value(value_, depth)}'
+            string_list.append(string)
+    string_list.append(f'{spaces}}}')
+    return '\n'.join(string_list)
 
 
 def stringify_diff(diff, depth):
@@ -55,6 +56,7 @@ def stringify_diff(diff, depth):
                             f'{stringify_value(value, depth + 1)}'
             diff_list.append(result_string)
     return '\n'.join(diff_list)
+
 
 def format_stylish(diff, depth=0):
     final_list = ['{', stringify_diff(diff, depth), '}']
