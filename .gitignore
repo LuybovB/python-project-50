@@ -8,3 +8,4 @@ coverage.xml
 .package-lock.json
 ..idea
 .demo.cast
+.idea
